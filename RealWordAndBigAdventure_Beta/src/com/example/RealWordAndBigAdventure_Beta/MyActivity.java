@@ -23,15 +23,17 @@ public class MyActivity extends Activity {
      */
     private ImageView bottle,shadow;
     private Button reset_bt,realword_bt,bigadventure_bt;
-    private DialogCreate dialogCreate;
+    private DialogCreate dialogCreate,exit_dialog;
     private RelativeLayout relativeLayoutTop;
     private LinearLayout linearlayout_bottom;
+    private boolean flag_intent = false;
+    private boolean flag_bottom_bt = false;
     //位移坐标
     private static float X_b=0,X_e=-0.05f,Y_b=0,Y_e=0.04f;
     //是否在旋转
     private static boolean pic_isRotating = false;
     //private static boolean reset_IsClicking = false;
-    private static boolean shadow_isRotating = false;
+    //private static boolean shadow_isRotating = false;
     //角度
     private static int angle = 0,randomangle=0;
 
@@ -50,7 +52,8 @@ public class MyActivity extends Activity {
         relativeLayoutTop = (RelativeLayout)findViewById(R.id.relativelayout_top);
         linearlayout_bottom = (LinearLayout)findViewById(R.id.linearlayout_bottom);
 
-        dialogCreate = new DialogCreate(MyActivity.this,relativeLayoutTop,realword_bt,bigadventure_bt,linearlayout_bottom);
+        dialogCreate = new DialogCreate(MyActivity.this,relativeLayoutTop,realword_bt,bigadventure_bt,linearlayout_bottom,bottle);
+        exit_dialog = new DialogCreate(MyActivity.this,MyActivity.this);
 
         //Bottle图片旋转设置
         bottle.setOnTouchListener(new View.OnTouchListener() {
@@ -58,7 +61,7 @@ public class MyActivity extends Activity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (pic_isRotating == false){
                     pic_isRotating = true;
-                    randomangle = (int) (Math.random()*3600)+1000;
+                    randomangle = (int) (Math.random()*2430)+1020;
                     Log.d("TAG_angle", "randomangle--->" + randomangle);
                     //bottle的图片旋转
                     //从那个角度开始旋转，旋转多少度，X轴的旋转方式和值，Y轴的旋转方式和值
@@ -69,9 +72,9 @@ public class MyActivity extends Activity {
                     //shadow图片旋转
                     AnimationSet animationSet_s = new AnimationSet(true);
                     //阴影变化
-                    TranslateAnimation translateAnimation_b = new TranslateAnimation(
+                    /*TranslateAnimation translateAnimation_b = new TranslateAnimation(
                             Animation.RELATIVE_TO_SELF,X_b,Animation.RELATIVE_TO_SELF,X_e,
-                            Animation.RELATIVE_TO_SELF,Y_b,Animation.RELATIVE_TO_SELF,Y_e);
+                            Animation.RELATIVE_TO_SELF,Y_b,Animation.RELATIVE_TO_SELF,Y_e);*/
                     RotateAnimation rotateAnimation_s = new RotateAnimation(angle,randomangle,
                             Animation.RELATIVE_TO_SELF, 0.5f,
                             Animation.RELATIVE_TO_SELF, 0.35f);
@@ -83,23 +86,23 @@ public class MyActivity extends Activity {
                     //LinearInterpolator linearInterpolator = new LinearInterpolator();
 
                     angle = randomangle%360;
-                    rotateAnimation.setDuration(randomangle*3);
-                    rotateAnimation_s.setDuration(randomangle*3);
+                    rotateAnimation.setDuration(randomangle+1000);
+                    rotateAnimation_s.setDuration(randomangle+1000);
                     /*rotateAnimation.setInterpolator(linearInterpolator);
                     rotateAnimation_s.setInterpolator(linearInterpolator);*/
-                    translateAnimation_b.setDuration(180*3);
-                    translateAnimation_b.setRepeatCount(randomangle/180-3);
+                    //translateAnimation_b.setDuration(180*3);
+                    //translateAnimation_b.setRepeatCount(randomangle/180-3);
                     Log.d("Clownxiaoqiang","repeatCount:"+randomangle/180);
-                    translateAnimation_b.setRepeatMode(Animation.REVERSE);
+                    //translateAnimation_b.setRepeatMode(Animation.REVERSE);
 
                     animationSet.addAnimation(rotateAnimation);
                     animationSet_s.addAnimation(rotateAnimation_s);
-                    animationSet_s.addAnimation(translateAnimation_b);
+                    //animationSet_s.addAnimation(translateAnimation_b);
 
                     bottle.startAnimation(animationSet);
                     shadow.startAnimation(animationSet_s);
 
-                    translateAnimation_b.setAnimationListener(new Animation.AnimationListener() {
+                    /*translateAnimation_b.setAnimationListener(new Animation.AnimationListener() {
                         @Override
                         public void onAnimationStart(Animation animation) {
                             //To change body of implemented methods use File | Settings | File Templates.
@@ -128,7 +131,7 @@ public class MyActivity extends Activity {
                         public void onAnimationRepeat(Animation animation) {
                             //To change body of implemented methods use File | Settings | File Templates.
                         }
-                    });
+                    });*/
                     rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
                         @Override
                         public void onAnimationStart(Animation animation) {
@@ -139,7 +142,10 @@ public class MyActivity extends Activity {
                         //保证旋转过程中不会受到点击影响
                         public void onAnimationEnd(Animation animation) {
                             pic_isRotating = false;
-                            dialogCreate.ShowDialog();
+                            flag_bottom_bt = dialogCreate.isFlag_islighting();
+                            if(flag_bottom_bt == false){
+                                dialogCreate.ShowDialog();
+                            }
                             //To change body of implemented methods use File | Settings | File Templates.
                         }
 
@@ -198,6 +204,7 @@ public class MyActivity extends Activity {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setClass(MyActivity.this,RealWord.class);
+                flag_intent = true;
                 MyActivity.this.startActivity(intent);
             }
         });
@@ -207,6 +214,7 @@ public class MyActivity extends Activity {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setClass(MyActivity.this,BigAdventure.class);
+                flag_intent = true;
                 MyActivity.this.startActivity(intent);
             }
         });
@@ -215,33 +223,32 @@ public class MyActivity extends Activity {
 
     @Override
     protected void onResume() {
-        linearlayout_bottom.setVisibility(View.INVISIBLE);
-        relativeLayoutTop.setBackgroundResource(R.drawable.dengguang);
-        Log.d("Clownxiaoqiang","in onResume");
+        if(flag_intent == true){
+            linearlayout_bottom.setVisibility(View.INVISIBLE);
+            relativeLayoutTop.setBackgroundResource(R.drawable.dengguang);
+            dialogCreate = new DialogCreate(MyActivity.this,relativeLayoutTop,realword_bt,bigadventure_bt,linearlayout_bottom,bottle);
+            Log.d("Clownxiaoqiang","in onResume");
+            flag_intent = false;
+            flag_bottom_bt = false;
+        }
         super.onResume();    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    protected void onPause() {
+        dialogCreate.dismiss();
+        Log.d("Clownxiaoqiang","in onPause");
+        super.onPause();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK){
-            AlertDialog alertDialog = new AlertDialog.Builder(MyActivity.this).
-            setTitle("提示！！").
-            setMessage("再玩一会儿吧？:)").
-            setPositiveButton("好的！",new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-
-                }
-            }).
-            setNegativeButton("不了，亲！",new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    angle = 0;
-                    MyActivity.this.finish();
-                }
-            }).create();
-            alertDialog.show();
+            Log.d("Clownxiaoqiang","being Touched");
+            if (pic_isRotating == false){
+               exit_dialog.ExitDialog();
+            }
         }
-        return super.onKeyDown(keyCode, event);    //To change body of overridden methods use File | Settings | File Templates.
+        return true;    //To change body of overridden methods use File | Settings | File Templates.
     }
 }

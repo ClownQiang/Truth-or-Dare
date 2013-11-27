@@ -56,7 +56,7 @@ public class ViewPageAdapter extends PagerAdapter {
         Log.d("Clownxiaoqiang","view:"+views.size());
         if (arg1 == views.size() - 1) {
             Button button = (Button) arg0
-                    .findViewById(R.id.start);
+                    .findViewById(R.id.startBtn);
             button.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -74,8 +74,10 @@ public class ViewPageAdapter extends PagerAdapter {
 
     private void goHome() {
         // 跳转
-        Intent intent = new Intent(activity, MyActivity.class);
+        Intent intent = new Intent();
+        intent.setClass(activity,DoorOpenActivity.class);
         activity.startActivity(intent);
+        activity.overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         activity.finish();
     }
 

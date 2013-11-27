@@ -3,21 +3,21 @@
           package="com.example.RealWordAndBigAdventure_Beta"
           android:versionCode="1"
           android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="14"/>
-    <application android:label="@string/app_name" android:icon="@drawable/zxhdmxlogo">
-        <activity android:name="MyActivity"
-                  android:label="@string/app_name">
-
-        </activity>
-        <activity android:name=".RealWord"/>
-        <activity android:name=".BigAdventure"/>
-        <activity android:name=".Screen.FlashActivity">
+    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="17"/>
+    <application android:label="@string/app_name" android:icon="@drawable/zxhdmxlogo" >
+        <activity android:name=".Screen.FlashActivity" android:theme="@style/Anim_style2" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name="MyActivity"
+                  android:label="@string/app_name">
+        </activity>
+        <activity android:name=".RealWord"/>
+        <activity android:name=".BigAdventure"/>
         <activity android:name=".Screen.GuideActivity"/>
+        <activity android:name=".Screen.DoorOpenActivity"/>
     </application>
     <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
 </manifest>

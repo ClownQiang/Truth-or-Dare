@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/real_rl"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@drawable/zhenxinhuabeijing"
         >
+    <ImageView
+            android:id="@+id/realword_topview"
+            android:scaleType="fitXY"
+            android:layout_alignParentTop="true"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/bg_light_top"
+            />
+    <ImageView
+            android:id="@+id/realword_bottomview"
+            android:scaleType="fitXY"
+            android:layout_alignParentBottom="true"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/bg_light_bottom"
+            />
     <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical"
-            android:background="@drawable/tuoyuanhuidu"
             >
         <TextView
                 android:layout_width="fill_parent"
@@ -39,8 +55,8 @@
                 android:layout_weight="2"
                 android:gravity="center_horizontal"
                 android:textColor="@android:color/black"
-                android:text="摇一摇"
+                android:text="摇一摇或者点击屏幕"
                 />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

@@ -9,6 +9,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.RealWordAndBigAdventure_Beta.TextRead.TextRead;
 
@@ -29,10 +33,14 @@ public class ShakeChange {
     private Context context;
     private TextView textView;
     private TextRead textRead;
+    private long NowTime,LastTime;
+    private ImageView topimagview,bottomimageview;
 
-    public ShakeChange(Context context,TextView textView,int judgement) {
+    public ShakeChange(Context context,TextView textView,int judgement,ImageView topimagview,ImageView bottomimageview) {
         this.context = context;
         this.textView = textView;
+        this.topimagview = topimagview;
+        this.bottomimageview = bottomimageview;
         textRead = new TextRead(context,judgement);
         init();
         Log.d("TAG","in ShakeChange");
@@ -61,17 +69,39 @@ public class ShakeChange {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
             float[] values = sensorEvent.values;
+            NowTime = System.currentTimeMillis();
+            if ((NowTime-LastTime)>70){
             float x = values[0];
             float y = values[1];
             float z = values[2];
             Log.d("TAG", "x-->" + x + "y-->" + y + "z-->" + z);
             if(Math.abs(x)>shakenum || Math.abs(y)>shakenum || Math.abs(z)>shakenum){
-                vibrator.vibrate(200);
                 Message msg = new Message();
                 msg.what = SENSOR_SHAKE;
+                //这里写动画开始
+                StartAnimation();
+                sensorManager.unregisterListener(this);
+                //这里开始震动
+                vibrator.vibrate(200);
                 handler.sendMessage(msg);
+                handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                            textView.setText(textRead.LineRead());
+                            vibrator.cancel();
+                            sensorManager.registerListener(sensorEventListener,
+                                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                                SensorManager.SENSOR_DELAY_NORMAL);
+                        } catch (IOException e) {
+                            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                        }
+                    }
+                },1000);
             }
+                LastTime = NowTime;
         }
+    }
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int i) {
@@ -79,20 +109,59 @@ public class ShakeChange {
         }
     };
 
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case SENSOR_SHAKE:
-                    try {
-                        textView.setText(textRead.LineRead());
-                    } catch (IOException e) {
-                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                    }
+
                     Log.d("TAG", "检测到摇晃，执行操作！");
                     break;
             }
         }
     };
+
+    public void StartAnimation(){
+        AnimationSet animdown = new AnimationSet(true);
+        TranslateAnimation end_translateAnimation_down = new TranslateAnimation(Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,+0.25f);
+        end_translateAnimation_down.setDuration(500);
+        TranslateAnimation end_translateAnimation_up = new TranslateAnimation(Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,-0.25f);
+        end_translateAnimation_up.setDuration(500);
+        end_translateAnimation_up.setStartOffset(500);
+        animdown.addAnimation(end_translateAnimation_down);
+        animdown.addAnimation(end_translateAnimation_up);
+        bottomimageview.startAnimation(animdown);
+
+        AnimationSet animup = new AnimationSet(true);
+        TranslateAnimation top_translateAnimation_up = new TranslateAnimation(Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,-0.25f);
+        top_translateAnimation_up.setDuration(500);
+        TranslateAnimation top_translateAnimation_down = new TranslateAnimation(Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,+0.25f);
+        top_translateAnimation_down.setDuration(500);
+        top_translateAnimation_down.setStartOffset(500);
+        animup.addAnimation(top_translateAnimation_up);
+        animup.addAnimation(top_translateAnimation_down);
+        topimagview.startAnimation(animup);
+        //下面写入相应的ImageView的使用Animatin
+
+        top_translateAnimation_up.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                //这里加入对于图片的操作
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                //结束时调用读取一行文字
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
+        });
+    }
 }
+

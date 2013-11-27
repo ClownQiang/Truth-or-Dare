@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:background="@drawable/yindao3"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
         >
+
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="快乐从现在开始"
+            android:gravity="center"
+            android:text=" \n \n快乐从现在开始"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:textSize="22sp"
+            android:textColor="@android:color/black"
             />
     <Button
-            android:id="@+id/start"
+            android:id="@+id/startBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="开始使用"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="120dp"
+            android:background="@drawable/start_bt"
+            android:layout_gravity="center_vertical"
+            android:onClick="startbutton"
             />
-
-</LinearLayout>
+</RelativeLayout>

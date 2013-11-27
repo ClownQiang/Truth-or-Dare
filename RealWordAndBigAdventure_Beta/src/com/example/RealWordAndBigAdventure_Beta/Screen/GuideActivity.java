@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.example.RealWordAndBigAdventure_Beta.R;
@@ -31,6 +32,7 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.guide);
 
         initViews();
@@ -100,4 +102,5 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
     public void onPageScrollStateChanged(int i) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
+
 }

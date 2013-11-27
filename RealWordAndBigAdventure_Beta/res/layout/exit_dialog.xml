@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:paddingTop="130dp"
+              android:background="@drawable/ts"
+        >
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/no_bt"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:background="@drawable/yes_bt_click"/>
+        <Button
+            android:id="@+id/yes_bt"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:background="@drawable/no_bt_click"/>
+    </LinearLayout>
+
+</LinearLayout>
