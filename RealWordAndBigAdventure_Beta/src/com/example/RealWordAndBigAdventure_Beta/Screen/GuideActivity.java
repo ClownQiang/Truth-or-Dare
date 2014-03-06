@@ -20,8 +20,13 @@ import java.util.List;
  * Time: 下午11:39
  * To change this template use File | Settings | File Templates.
  */
+
+/*根据名字可以明白，这里的是一个引导界面的Activity，实现了ViewPager.OnPageChangeListener接口，
+ * 具体是什么样子，大家直接用一下就可以明白
+ */
 public class GuideActivity extends Activity implements ViewPager.OnPageChangeListener {
 
+    //生成相对应的引用
     private ViewPager viewPager;
     private ViewPageAdapter viewPageAdapter;
     private List<View> viewList;
@@ -32,23 +37,24 @@ public class GuideActivity extends Activity implements ViewPager.OnPageChangeLis
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //这一行可以使的我们界面没有顶部横栏，大家可以注释了跑起来看看效果
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.guide);
-
+        //我们将初始化View的函数放在了一起
         initViews();
-
+        //初始化底部圆点的函数
         initDots();
     }
 
     private void initViews(){
         LayoutInflater layoutInflater = LayoutInflater.from(GuideActivity.this);
         viewList = new ArrayList<View>();
-        // 初始化引导图片列表
+        // 初始化引导图片列表，加入的guiderview为引导界面的三个视图
         viewList.add(layoutInflater.inflate(R.layout.guiderview_1, null));
         viewList.add(layoutInflater.inflate(R.layout.guideview_2, null));
         viewList.add(layoutInflater.inflate(R.layout.guideview_3, null));
 
-        // 初始化Adapter
+        // 初始化Adapter，将已经放入
         viewPageAdapter = new ViewPageAdapter(viewList, this);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);

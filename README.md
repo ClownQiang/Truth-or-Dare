@@ -1,4 +1,10 @@
 Truth-or-Dare
-=============
-Something can give your funny,you can play with your friends
-A small multiplayer arcade game
+==========
+
+##关于这个应用
+>这个是一个简单的多人娱乐游戏--------真心话大冒险，现在已经在百度应用上架，只是试试手的小的app，现在主要供大一的看看。     囧
+
+##怎么看
+>很多大一可能刚开始会有一点不能理解代码，这没有什么。我给代码加了少许的注释，而且为一些需要理解android概念，我加上了请戳[网址]，大家可以复制了，看看别人的理解，这样可以加深对其中概念的理解。这个代码中的注释赶的比较急，所以还有很多问题，以及代码注释不完全，大家可以随时提出来。
+
+- [真心话大冒险—百度应用](http://as.baidu.com/a/item?docid=5078477&pre=web_am_se)

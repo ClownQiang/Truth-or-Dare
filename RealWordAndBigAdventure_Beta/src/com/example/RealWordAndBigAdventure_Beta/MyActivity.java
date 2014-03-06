@@ -17,6 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import com.example.RealWordAndBigAdventure_Beta.tools.DialogCreate;
 
+/*
+ * 这里为进入后的主界面，关于下面的注释代码大家不用管。
+ */
 public class MyActivity extends Activity {
     /**
      * Called when the activity is first created.
@@ -52,6 +55,7 @@ public class MyActivity extends Activity {
         relativeLayoutTop = (RelativeLayout)findViewById(R.id.relativelayout_top);
         linearlayout_bottom = (LinearLayout)findViewById(R.id.linearlayout_bottom);
 
+        //生成两个自定义对话框(Dialog)
         dialogCreate = new DialogCreate(MyActivity.this,relativeLayoutTop,realword_bt,bigadventure_bt,linearlayout_bottom,bottle);
         exit_dialog = new DialogCreate(MyActivity.this,MyActivity.this);
 
@@ -59,8 +63,10 @@ public class MyActivity extends Activity {
         bottle.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                //当中间的酒瓶没有旋转时，才能旋转，在旋转是不能再次点击
                 if (pic_isRotating == false){
                     pic_isRotating = true;
+                    //随机一个旋转角度
                     randomangle = (int) (Math.random()*2430)+1020;
                     Log.d("TAG_angle", "randomangle--->" + randomangle);
                     //bottle的图片旋转
@@ -142,6 +148,7 @@ public class MyActivity extends Activity {
                         //保证旋转过程中不会受到点击影响
                         public void onAnimationEnd(Animation animation) {
                             pic_isRotating = false;
+                            //flag_bottom_bt是判断点击的再来一次，还是接受挑战
                             flag_bottom_bt = dialogCreate.isFlag_islighting();
                             if(flag_bottom_bt == false){
                                 dialogCreate.ShowDialog();
@@ -208,7 +215,7 @@ public class MyActivity extends Activity {
                 MyActivity.this.startActivity(intent);
             }
         });
-
+        //大冒险按钮
         bigadventure_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -221,6 +228,8 @@ public class MyActivity extends Activity {
 
     }
 
+    //覆写onResume，在调用这个函数时，返回到最开始的状态，这里涉及到了很多Activity状态的函数，
+    //不懂请戳[http://blog.csdn.net/niu_gao/article/details/7103907]
     @Override
     protected void onResume() {
         if(flag_intent == true){
@@ -234,6 +243,7 @@ public class MyActivity extends Activity {
         super.onResume();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
+    //覆写暂停函数
     @Override
     protected void onPause() {
         dialogCreate.dismiss();
@@ -241,6 +251,7 @@ public class MyActivity extends Activity {
         super.onPause();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
+    //对点击back键作出反应
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK){

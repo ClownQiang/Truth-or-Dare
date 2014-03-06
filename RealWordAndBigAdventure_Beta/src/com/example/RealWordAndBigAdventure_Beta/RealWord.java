@@ -18,6 +18,10 @@ import java.io.IOException;
  * Time: 下午12:44
  * To change this template use File | Settings | File Templates.
  */
+
+/*
+ * 进入后的真心话界面
+ */
 public class RealWord extends Activity {
 
     private TextView realword_tv;

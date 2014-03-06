@@ -25,6 +25,10 @@ import java.io.IOException;
  * Time: 下午4:53
  * To change this template use File | Settings | File Templates.
  */
+
+/*
+ * 这里是对摇晃手机的定义的类，主要有注册重力传感器
+ */
 public class ShakeChange {
     private SensorManager sensorManager;
     private Vibrator vibrator;
@@ -36,6 +40,7 @@ public class ShakeChange {
     private long NowTime,LastTime;
     private ImageView topimagview,bottomimageview;
 
+    //构造函数
     public ShakeChange(Context context,TextView textView,int judgement,ImageView topimagview,ImageView bottomimageview) {
         this.context = context;
         this.textView = textView;
@@ -51,6 +56,7 @@ public class ShakeChange {
         vibrator = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
     }
 
+    //在BigAdventure与RealWord中的onresume和onpause中调用
     public void onResume() {
         if (sensorManager != null) { // 注册监听器
             sensorManager.registerListener(sensorEventListener,
@@ -65,43 +71,47 @@ public class ShakeChange {
         }
     }
 
+    //重力传感器监听
     private SensorEventListener sensorEventListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
             float[] values = sensorEvent.values;
+            //这里的NowTime和LastTime是判断两次摇晃时间的间隔，不能连续摇晃
             NowTime = System.currentTimeMillis();
-            if ((NowTime-LastTime)>70){
-            float x = values[0];
-            float y = values[1];
-            float z = values[2];
-            Log.d("TAG", "x-->" + x + "y-->" + y + "z-->" + z);
-            if(Math.abs(x)>shakenum || Math.abs(y)>shakenum || Math.abs(z)>shakenum){
-                Message msg = new Message();
-                msg.what = SENSOR_SHAKE;
-                //这里写动画开始
-                StartAnimation();
-                sensorManager.unregisterListener(this);
-                //这里开始震动
-                vibrator.vibrate(200);
-                handler.sendMessage(msg);
-                handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                            textView.setText(textRead.LineRead());
-                            vibrator.cancel();
-                            sensorManager.registerListener(sensorEventListener,
-                                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                                SensorManager.SENSOR_DELAY_NORMAL);
-                        } catch (IOException e) {
-                            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            if ((NowTime - LastTime) > 70) {
+                //这里是获取传感器中的数据，为x,y,z三维坐标
+                float x = values[0];
+                float y = values[1];
+                float z = values[2];
+                Log.d("TAG", "x-->" + x + "y-->" + y + "z-->" + z);
+                //这里根据数据大小，判断是否达到摇晃的标准
+                if (Math.abs(x) > shakenum || Math.abs(y) > shakenum || Math.abs(z) > shakenum) {
+                    Message msg = new Message();
+                    msg.what = SENSOR_SHAKE;
+                    //这里写动画开始
+                    StartAnimation();
+                    sensorManager.unregisterListener(this);
+                    //这里开始震动
+                    vibrator.vibrate(200);
+                    handler.sendMessage(msg);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                textView.setText(textRead.LineRead());
+                                vibrator.cancel();
+                                sensorManager.registerListener(sensorEventListener,
+                                        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                                        SensorManager.SENSOR_DELAY_NORMAL);
+                            } catch (IOException e) {
+                                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                            }
                         }
-                    }
-                },1000);
-            }
+                    }, 1000);
+                }
                 LastTime = NowTime;
+            }
         }
-    }
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int i) {
@@ -123,6 +133,7 @@ public class ShakeChange {
         }
     };
 
+    //动画效果
     public void StartAnimation(){
         AnimationSet animdown = new AnimationSet(true);
         TranslateAnimation end_translateAnimation_down = new TranslateAnimation(Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,0f,Animation.RELATIVE_TO_SELF,+0.25f);

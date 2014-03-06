@@ -21,6 +21,9 @@ import java.io.IOException;
  * Time: 下午1:07
  * To change this template use File | Settings | File Templates.
  */
+/*
+ * 进入后的大冒险界面
+ */
 public class BigAdventure extends Activity {
 
     private TextView bigadventure_tv;
@@ -45,6 +48,7 @@ public class BigAdventure extends Activity {
 
         linearLayout = (LinearLayout)findViewById(R.id.linearlayout_bottom);
 
+        //设置触摸监听器，在触摸时调用
         relativeLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {

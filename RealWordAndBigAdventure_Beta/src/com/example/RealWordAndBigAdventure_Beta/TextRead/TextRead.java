@@ -15,15 +15,24 @@ import java.io.InputStreamReader;
  * Time: 下午12:41
  * To change this template use File | Settings | File Templates.
  */
+
+/*
+ * 这个是利用了java的文件读取，因为利用数据库存储数据可能不是很方便，所以将文件存在文本中，然后一条一条读取，这个大家可以作为以后
+ * 开发的一点小点子，文件存在assets，分别为真心话和大冒险的文件，大家可以自己添加。。。
+ * java文件读取，请戳[http://blog.csdn.net/smartcat86/article/details/4085739]
+ * java在android中的读取[http://blog.csdn.net/ztp800201/article/details/7322110]
+ */
 public class TextRead {
 
     private Context context;
     private int judgement;
+    //构造函数
     public TextRead(Context context,int judgement) {
         this.context = context;
         this.judgement = judgement;
     }
 
+    //
     private String readLineNumber(int lineNumber) throws IOException {
         String line;
         String s = null;

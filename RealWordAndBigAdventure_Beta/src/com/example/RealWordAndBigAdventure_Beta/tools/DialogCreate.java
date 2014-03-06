@@ -17,6 +17,11 @@ import com.example.RealWordAndBigAdventure_Beta.R;
  * Time: 下午5:08
  * To change this template use File | Settings | File Templates.
  */
+
+/*
+ * 自定义Dialog，因为大家看见的对话框太丑了，所以自定义一个，关于AlertDialog不懂
+ * 请戳[http://blog.csdn.net/hellogv/article/details/5955959]
+ */
 public class DialogCreate extends AlertDialog{
 
     private Context context;
@@ -30,6 +35,7 @@ public class DialogCreate extends AlertDialog{
     private ImageView imageView;
     private boolean flag_islighting = false;
 
+    //下面两个是对话框的构造函数
     public DialogCreate(Context context,Activity activity) {
         super(context);
         this.context = context;
@@ -48,16 +54,19 @@ public class DialogCreate extends AlertDialog{
     }
 
     public void ShowDialog(){
+        //LayoutInflater载入一个xml，有点类似findviewbyID(),不懂请戳[http://lpqsun-126-com.iteye.com/blog/1158070]
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.dialog,null);
-        //这里可以写对控件的使用
+        //这里可以写对控件的使用,这里载入xml中的按钮(Button)
         rotateagain = (Button)layout.findViewById(R.id.rotateagain);
         comeon = (Button)layout.findViewById(R.id.comeon);
 
+        //为按钮设置事件
         rotateagain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 flag_islighting = false;
+                //这里的dismiss()是将dialog清除
                 alertDialog.dismiss();
             }
         });
@@ -71,6 +80,7 @@ public class DialogCreate extends AlertDialog{
                 alertDialog.dismiss();
             }
         });
+
         builder = new AlertDialog.Builder(context);
         builder.setView(layout);
         alertDialog = builder.create();
@@ -84,6 +94,7 @@ public class DialogCreate extends AlertDialog{
         alertDialog.show();
     }
 
+    //这里设置的退出时的对话框
     public void ExitDialog(){
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.exit_dialog,null);
@@ -108,6 +119,7 @@ public class DialogCreate extends AlertDialog{
         builder = new AlertDialog.Builder(context);
         builder.setView(layout);
         alertDialog = builder.create();
+        //利用Window，WindowManager设置对话框大小
         Window dialogWindow = alertDialog.getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         lp.width = 330;
