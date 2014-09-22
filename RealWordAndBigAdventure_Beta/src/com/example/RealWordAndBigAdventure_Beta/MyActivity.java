@@ -51,7 +51,7 @@ public class MyActivity extends Activity {
 
         //Umeng自动更新
         UmengUpdateAgent.update(this);
-        
+
         //reset_bt = (Button)findViewById(R.id.reset);
         realword_bt = (Button)findViewById(R.id.realword_bt);
         bigadventure_bt = (Button)findViewById(R.id.bigadventure_bt);
