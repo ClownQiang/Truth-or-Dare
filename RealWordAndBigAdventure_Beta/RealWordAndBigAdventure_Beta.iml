@@ -14,7 +14,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="AppOffer_2.2.0" level="project" />
-    <orderEntry type="module" module-name="umeng_library" exported="" />
     <orderEntry type="library" name="android-support-v4" level="project" />
     <orderEntry type="library" name="umeng-analytics-v5.2.4" level="project" />
   </component>

@@ -2,6 +2,7 @@ package com.example.RealWordAndBigAdventure_Beta;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -9,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.*;
+import cn.waps.AppConnect;
 import com.example.RealWordAndBigAdventure_Beta.TextRead.TextRead;
 import com.example.RealWordAndBigAdventure_Beta.tools.ShakeChange;
 
@@ -39,6 +41,7 @@ public class BigAdventure extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.bigadventure);
 
+        AppConnect.getInstance(this);
         bigadventure_tv = (TextView)findViewById(R.id.bigadventure_textview);
         topview = (ImageView)findViewById(R.id.bigadventure_topview);
         bottomview = (ImageView)findViewById(R.id.bigadventure_bottomview);
@@ -66,26 +69,13 @@ public class BigAdventure extends Activity {
                 return false;  //To change body of implemented methods use File | Settings | File Templates.
             }
         });
-        /*b_backbutton = (Button)findViewById(R.id.b_backButton);
-        b_sharebutton = (Button)findViewById(R.id.b_shareButton);
 
-        b_backbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BigAdventure.this.finish();
-            }
-        });
-
-        b_sharebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(Intent.createChooser(intent, "请选择"));
-            }
-        });*/
-
+        AppConnect.getInstance(this).initAdInfo();
+        //设置迷你广告背景颜色
+        AppConnect.getInstance(this).setAdBackColor(Color.argb(50, 120, 240, 120)); //设置迷你广告广告语颜色
+        AppConnect.getInstance(this).setAdForeColor(Color.YELLOW); //若未设置以上两个颜色,则默认为黑底白字
+        LinearLayout miniLayout =(LinearLayout)findViewById(R.id.miniAdLinearLayout);
+        AppConnect.getInstance(this).showMiniAd(this, miniLayout, 10); //默认 10 秒切换一次广告
     }
 
     @Override
@@ -100,4 +90,9 @@ public class BigAdventure extends Activity {
         super.onPause();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppConnect.getInstance(this).close();
+    }
 }

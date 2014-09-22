@@ -39,7 +39,7 @@
                 android:layout_weight="5"
                 android:textSize="35dp"
                 android:gravity="center_horizontal"
-                android:textColor="@android:color/holo_red_dark"
+                android:textColor="#FF0000"
                 android:text="大冒险"
                 />
         <TextView
@@ -58,4 +58,11 @@
                 android:text="摇一摇或者点击屏幕"
                 />
     </LinearLayout>
+    <LinearLayout
+            android:id="@+id/miniAdLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            />
 </RelativeLayout>

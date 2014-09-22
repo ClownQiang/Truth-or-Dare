@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Window;
+import cn.waps.AppConnect;
 import com.example.RealWordAndBigAdventure_Beta.MyActivity;
 import com.example.RealWordAndBigAdventure_Beta.R;
 import com.umeng.analytics.MobclickAgent;
@@ -36,7 +37,7 @@ public class FlashActivity extends Activity {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case GO_HOME:
                     GoHome();
                     break;
@@ -56,24 +57,24 @@ public class FlashActivity extends Activity {
     }
 
     //这里使用了前面的SharePreference里面的值
-    private void init(){
+    private void init() {
         //使用SharedPreferences保存界面信息
-        SharedPreferences sharedPreference = getSharedPreferences(ISFIRSTIN,MODE_PRIVATE);
+        SharedPreferences sharedPreference = getSharedPreferences(ISFIRSTIN, MODE_PRIVATE);
         //第一次写入
-        isFirstin = sharedPreference.getBoolean("isFirstin",true);
+        isFirstin = sharedPreference.getBoolean("isFirstin", true);
         //这里通过判断SharedPreferences的值，判断是否进入引导界面，如果为true,表示第一次进入，如果为false表示不用进入
         //这里的Delay为延迟时间,而发送的消息为GO_HOME或者GO_GUIDE，
-        if(!isFirstin){
+        if (!isFirstin) {
             //使用sendEmptyMessageDelayed，发送一个消息，前面的handleMessage进行接收，然后对message进行判断
             handler.sendEmptyMessageDelayed(GO_HOME, DELAY);
-        }else{
+        } else {
             handler.sendEmptyMessageDelayed(GO_GUIDE, DELAY);
         }
     }
 
     //直接去主界面，Intent传递，关于Intent不懂的，
     //请戳[http://www.cnblogs.com/feisky/archive/2010/01/16/1649081.html]
-    private void GoHome(){
+    private void GoHome() {
         Intent intent = new Intent();
         intent.setClass(FlashActivity.this, MyActivity.class);
         FlashActivity.this.startActivity(intent);
@@ -81,9 +82,9 @@ public class FlashActivity extends Activity {
     }
 
     //直接去引导界面，Intent传递
-    private void GoGuide(){
+    private void GoGuide() {
         Intent intent = new Intent();
-        intent.setClass(FlashActivity.this,GuideActivity.class);
+        intent.setClass(FlashActivity.this, GuideActivity.class);
         FlashActivity.this.startActivity(intent);
         FlashActivity.this.finish();
     }
