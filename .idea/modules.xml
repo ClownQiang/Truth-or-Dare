@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RealWordAndBigAdventure_Beta/RealWordAndBigAdventure_Beta.iml" filepath="$PROJECT_DIR$/RealWordAndBigAdventure_Beta/RealWordAndBigAdventure_Beta.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/umeng_library/umeng_library.iml" filepath="$PROJECT_DIR$/library/umeng_library/umeng_library.iml" />
     </modules>
   </component>
 </project>

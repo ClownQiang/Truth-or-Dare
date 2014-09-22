@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import com.example.RealWordAndBigAdventure_Beta.tools.DialogCreate;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 /*
  * 这里为进入后的主界面，关于下面的注释代码大家不用管。
@@ -47,6 +49,9 @@ public class MyActivity extends Activity {
         setContentView(R.layout.main);
 
 
+        //Umeng自动更新
+        UmengUpdateAgent.update(this);
+        
         //reset_bt = (Button)findViewById(R.id.reset);
         realword_bt = (Button)findViewById(R.id.realword_bt);
         bigadventure_bt = (Button)findViewById(R.id.bigadventure_bt);
@@ -240,6 +245,7 @@ public class MyActivity extends Activity {
             flag_intent = false;
             flag_bottom_bt = false;
         }
+        MobclickAgent.onResume(this);
         super.onResume();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
@@ -247,7 +253,8 @@ public class MyActivity extends Activity {
     @Override
     protected void onPause() {
         dialogCreate.dismiss();
-        Log.d("Clownxiaoqiang","in onPause");
+        Log.d("Clownxiaoqiang", "in onPause");
+        MobclickAgent.onPause(this);
         super.onPause();    //To change body of overridden methods use File | Settings | File Templates.
     }
 

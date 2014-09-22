@@ -9,6 +9,7 @@ import android.os.Message;
 import android.view.Window;
 import com.example.RealWordAndBigAdventure_Beta.MyActivity;
 import com.example.RealWordAndBigAdventure_Beta.R;
+import com.umeng.analytics.MobclickAgent;
 
 
 /**
@@ -50,7 +51,7 @@ public class FlashActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.flash);
-
+        MobclickAgent.setDebugMode(true);
         init();
     }
 
