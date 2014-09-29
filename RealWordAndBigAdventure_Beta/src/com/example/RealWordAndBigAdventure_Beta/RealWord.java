@@ -1,5 +1,6 @@
 package com.example.RealWordAndBigAdventure_Beta;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +11,10 @@ import android.widget.*;
 import cn.waps.AppConnect;
 import com.example.RealWordAndBigAdventure_Beta.TextRead.TextRead;
 import com.example.RealWordAndBigAdventure_Beta.tools.ShakeChange;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.media.UMImage;
 
 import java.io.IOException;
 
@@ -35,8 +40,11 @@ public class RealWord extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.realword);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         AppConnect.getInstance(this);
 
         realword_tv = (TextView) findViewById(R.id.realword_textview);
@@ -71,6 +79,37 @@ public class RealWord extends Activity {
         AppConnect.getInstance(this).setAdForeColor(Color.YELLOW); //若未设置以上两个颜色,则默认为黑底白字
         LinearLayout miniLayout = (LinearLayout) findViewById(R.id.miniAdLinearLayout);
         AppConnect.getInstance(this).showMiniAd(this, miniLayout, 10); //默认 10 秒切换一次广告
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                this.finish();
+                return true;
+            case R.id.menu_share:
+                // 首先在您的Activity中添加如下成员变量
+                final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
+                // 设置分享内容
+                mController.setShareContent("我在真心话大冒险中被整了，你也来加入吧！！！");
+                // 设置分享图片, 参数2为图片的url地址
+                mController.setShareMedia(new UMImage(this,
+                        "http://www.umeng.com/images/pic/banner_module_social.png"));
+                mController.setAppWebSite(SHARE_MEDIA.RENREN, "http://www.umeng.com/social");
+                mController.getConfig().setPlatforms(SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QZONE, SHARE_MEDIA.RENREN);
+                mController.openShare(this, false);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_share, menu);
+        return true;
     }
 
     @Override

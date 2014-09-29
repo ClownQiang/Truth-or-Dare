@@ -1,18 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.RealWordAndBigAdventure_Beta"
-          android:versionCode="2"
-          android:versionName="1.1">
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="2" android:versionName="1.1"
+          package="com.example.RealWordAndBigAdventure_Beta">
     <uses-sdk android:minSdkVersion="14"/>
-    <application android:label="@string/app_name" android:icon="@drawable/zxhdmxlogo">
+    <application android:icon="@drawable/zxhdmxlogo" android:label="@string/app_name">
         <activity android:name=".Screen.FlashActivity" android:theme="@style/Anim_style2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="MyActivity"
-                  android:label="@string/app_name">
+        <activity android:label="@string/app_name" android:name="MyActivity">
         </activity>
         <activity android:name=".RealWord"/>
         <activity android:name=".BigAdventure"/>
@@ -20,16 +17,34 @@
         <activity android:name=".Screen.DoorOpenActivity"/>
 
         <!--Umeng Service-->
-        <service
-                android:name="com.umeng.update.net.DownloadingService"
-                android:process=":DownloadingService">
+        <service android:name="com.umeng.update.net.DownloadingService" android:process=":DownloadingService">
         </service>
-        <activity
-                android:name="com.umeng.update.UpdateDialogActivity"
-                android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        <activity android:name="com.umeng.update.UpdateDialogActivity"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
-        <meta-data android:value="529dbdb756240b93f10337dc" android:name="UMENG_APPKEY"></meta-data>
-        <meta-data android:value="Channel ID" android:name="UMENG_CHANNEL"/>
+        <meta-data android:name="UMENG_APPKEY" android:value="529dbdb756240b93f10337dc"/>
+        <meta-data android:name="UMENG_CHANNEL" android:value="Channel ID"/>
+
+        <activity android:configChanges="orientation|keyboard" android:launchMode="singleTask"
+                  android:name="com.umeng.socialize.view.ShareActivity" android:noHistory="true"
+                  android:theme="@style/Theme.UMDialog" android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true"
+                  android:name=".wxapi.WXEntryActivity" android:screenOrientation="portrait"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:configChanges="orientation|navigation|keyboardHidden"
+                  android:name="com.renn.rennsdk.oauth.OAuthActivity"/>
+        <activity android:configChanges="orientation|keyboard" android:launchMode="singleTask"
+                  android:name="com.tencent.tauth.AuthActivity" android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="tencent添加你的App Id"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.tencent.connect.common.AssistActivity" android:screenOrientation="portrait"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
         <!--Ad Service-->
         <meta-data android:name="APP_ID" android:value="da372f4bbc6dae4961b22f5f54f94348"/>
         <meta-data android:name="APP_PID" android:value="default"/>
@@ -42,4 +57,11 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 </manifest>
