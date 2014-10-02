@@ -11,6 +11,7 @@ import cn.waps.AppConnect;
 import com.example.RealWordAndBigAdventure_Beta.MyActivity;
 import com.example.RealWordAndBigAdventure_Beta.R;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.fb.FeedbackAgent;
 
 
 /**
@@ -53,6 +54,8 @@ public class FlashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.flash);
         MobclickAgent.setDebugMode(true);
+        FeedbackAgent feedbackAgent = new FeedbackAgent(this);
+        feedbackAgent.sync();
         init();
     }
 

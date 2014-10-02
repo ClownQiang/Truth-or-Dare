@@ -10,11 +10,16 @@ import android.view.*;
 import android.widget.*;
 import cn.waps.AppConnect;
 import com.example.RealWordAndBigAdventure_Beta.TextRead.TextRead;
+import com.example.RealWordAndBigAdventure_Beta.tools.Constant;
 import com.example.RealWordAndBigAdventure_Beta.tools.ShakeChange;
+import com.example.RealWordAndBigAdventure_Beta.tools.Utils;
+import com.umeng.fb.FeedbackAgent;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
 import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.sso.QZoneSsoHandler;
+import com.umeng.socialize.sso.RenrenSsoHandler;
 
 import java.io.IOException;
 
@@ -35,6 +40,7 @@ public class RealWord extends Activity {
     private ShakeChange shakeChange;
     private ImageView topview, bottomview;
     private TextRead textRead;
+    private String showText;
     private RelativeLayout relativeLayout;
     //private Button back_bt,share_bt;
 
@@ -44,6 +50,7 @@ public class RealWord extends Activity {
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("真心话");
 
         AppConnect.getInstance(this);
 
@@ -63,7 +70,8 @@ public class RealWord extends Activity {
                     @Override
                     public void run() {
                         try {
-                            realword_tv.setText(textRead.LineRead());
+                            showText = textRead.LineRead();
+                            realword_tv.setText(showText);
                         } catch (IOException e) {
                             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                         }
@@ -88,17 +96,17 @@ public class RealWord extends Activity {
                 onBackPressed();
                 this.finish();
                 return true;
+            case R.id.menu_add:
+                Intent intent = new Intent(this, AddActivity.class);
+                intent.putExtra("flag", Constant.REALWORLD);
+                startActivity(intent);
+                return true;
             case R.id.menu_share:
-                // 首先在您的Activity中添加如下成员变量
-                final UMSocialService mController = UMServiceFactory.getUMSocialService("com.umeng.share");
-                // 设置分享内容
-                mController.setShareContent("我在真心话大冒险中被整了，你也来加入吧！！！");
-                // 设置分享图片, 参数2为图片的url地址
-                mController.setShareMedia(new UMImage(this,
-                        "http://www.umeng.com/images/pic/banner_module_social.png"));
-                mController.setAppWebSite(SHARE_MEDIA.RENREN, "http://www.umeng.com/social");
-                mController.getConfig().setPlatforms(SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QZONE, SHARE_MEDIA.RENREN);
-                mController.openShare(this, false);
+                Utils.shareSNS(showText, this, Constant.REALWORLD);
+                return true;
+            case R.id.menu_feedback:
+                FeedbackAgent feedbackAgent = new FeedbackAgent(this);
+                feedbackAgent.startFeedbackActivity();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

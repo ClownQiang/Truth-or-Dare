@@ -2,9 +2,18 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+            android:id="@+id/menu_add"
+            android:title="添加"
+            android:showAsAction="ifRoom|collapseActionView"
+            />
+    <item
             android:id="@+id/menu_share"
             android:title="分享"
-            android:icon="@android:drawable/ic_menu_share"
+            android:showAsAction="ifRoom|collapseActionView"
+            />
+    <item
+            android:id="@+id/menu_feedback"
+            android:title="反馈"
             android:showAsAction="ifRoom|collapseActionView"
             />
 </menu>
