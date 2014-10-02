@@ -15,6 +15,7 @@
         <activity android:name=".BigAdventureActivity"/>
         <activity android:name=".Screen.GuideActivity"/>
         <activity android:name=".Screen.DoorOpenActivity"/>
+        <activity android:name=".AddActivity" android:theme="@android:style/Theme.Holo.Light" android:label="添加"/>
 
         <!--Umeng Service Setting-->
         <service android:name="com.umeng.update.net.DownloadingService" android:process=":DownloadingService">
@@ -47,7 +48,6 @@
                   android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name="com.umeng.fb.ContactActivity"
                   android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity android:name=".AddActivity"/>
 
         <!--Umeng Service-->
         <meta-data android:name="UMENG_APPKEY" android:value="529dbdb756240b93f10337dc"/>
