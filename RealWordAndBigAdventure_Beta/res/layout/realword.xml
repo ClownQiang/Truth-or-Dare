@@ -2,10 +2,10 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/real_rl"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@drawable/zhenxinhuabeijing"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/zhenxinhuabeijing"
         >
     <ImageView
             android:id="@+id/realword_topview"
@@ -38,7 +38,7 @@
                 android:layout_width="fill_parent"
                 android:textSize="35dp"
                 android:gravity="center_horizontal"
-                android:textColor="@android:color/holo_red_dark"
+                android:textColor="#FF0000"
                 android:text="真心话"
                 android:layout_weight="5"
                 />
@@ -58,5 +58,11 @@
                 android:text="摇一摇或者点击屏幕"
                 />
     </LinearLayout>
-
+    <LinearLayout
+            android:id="@+id/miniAdLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            />
 </RelativeLayout>

@@ -1,13 +1,25 @@
 package com.example.RealWordAndBigAdventure_Beta;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.*;
 import android.widget.*;
+import cn.waps.AppConnect;
 import com.example.RealWordAndBigAdventure_Beta.TextRead.TextRead;
+import com.example.RealWordAndBigAdventure_Beta.tools.Constant;
 import com.example.RealWordAndBigAdventure_Beta.tools.ShakeChange;
+import com.example.RealWordAndBigAdventure_Beta.tools.Utils;
+import com.umeng.fb.FeedbackAgent;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.sso.QZoneSsoHandler;
+import com.umeng.socialize.sso.RenrenSsoHandler;
 
 import java.io.IOException;
 
@@ -26,25 +38,29 @@ public class RealWord extends Activity {
 
     private TextView realword_tv;
     private ShakeChange shakeChange;
-    private ImageView topview,bottomview;
+    private ImageView topview, bottomview;
     private TextRead textRead;
+    private String showText;
     private RelativeLayout relativeLayout;
     //private Button back_bt,share_bt;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.realword);
 
-        realword_tv = (TextView)findViewById(R.id.realword_textview);
-        topview = (ImageView)findViewById(R.id.realword_topview);
-        bottomview = (ImageView)findViewById(R.id.realword_bottomview);
-        relativeLayout = (RelativeLayout)findViewById(R.id.real_rl);
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("真心话");
 
-        /*back_bt = (Button)findViewById(R.id.r_backButton);
-        share_bt = (Button)findViewById(R.id.r_shareButton);*/
-        shakeChange = new ShakeChange(RealWord.this,realword_tv,1,topview,bottomview);
-        textRead = new TextRead(RealWord.this,1);
+        AppConnect.getInstance(this);
+
+        realword_tv = (TextView) findViewById(R.id.realword_textview);
+        topview = (ImageView) findViewById(R.id.realword_topview);
+        bottomview = (ImageView) findViewById(R.id.realword_bottomview);
+        relativeLayout = (RelativeLayout) findViewById(R.id.real_rl);
+
+        shakeChange = new ShakeChange(RealWord.this, realword_tv, 1, topview, bottomview);
+        textRead = new TextRead(RealWord.this, 1);
 
         relativeLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -54,7 +70,8 @@ public class RealWord extends Activity {
                     @Override
                     public void run() {
                         try {
-                            realword_tv.setText(textRead.LineRead());
+                            showText = textRead.LineRead();
+                            realword_tv.setText(showText);
                         } catch (IOException e) {
                             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                         }
@@ -64,22 +81,43 @@ public class RealWord extends Activity {
             }
         });
 
-        /*back_bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RealWord.this.finish();
-            }
-        });
+        AppConnect.getInstance(this).initAdInfo();
+        //设置迷你广告背景颜色
+        AppConnect.getInstance(this).setAdBackColor(Color.argb(50, 120, 240, 120)); //设置迷你广告广告语颜色
+        AppConnect.getInstance(this).setAdForeColor(Color.YELLOW); //若未设置以上两个颜色,则默认为黑底白字
+        LinearLayout miniLayout = (LinearLayout) findViewById(R.id.miniAdLinearLayout);
+        AppConnect.getInstance(this).showMiniAd(this, miniLayout, 10); //默认 10 秒切换一次广告
+    }
 
-        share_bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(Intent.createChooser(intent, "请选择"));
-            }
-        });*/
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                this.finish();
+                return true;
+            case R.id.menu_add:
+                Intent intent = new Intent(this, AddActivity.class);
+                intent.putExtra("flag", Constant.REALWORLD);
+                startActivity(intent);
+                return true;
+            case R.id.menu_share:
+                Utils.shareSNS(showText, this, Constant.REALWORLD);
+                return true;
+            case R.id.menu_feedback:
+                FeedbackAgent feedbackAgent = new FeedbackAgent(this);
+                feedbackAgent.startFeedbackActivity();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_share, menu);
+        return true;
     }
 
     @Override
@@ -94,4 +132,9 @@ public class RealWord extends Activity {
         super.onPause();    //To change body of overridden methods use File | Settings | File Templates.
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppConnect.getInstance(this).close();
+    }
 }

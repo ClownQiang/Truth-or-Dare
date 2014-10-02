@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/menu_add"
+            android:title="添加"
+            android:showAsAction="ifRoom|collapseActionView"
+            />
+    <item
+            android:id="@+id/menu_share"
+            android:title="分享"
+            android:showAsAction="ifRoom|collapseActionView"
+            />
+    <item
+            android:id="@+id/menu_feedback"
+            android:title="反馈"
+            android:showAsAction="ifRoom|collapseActionView"
+            />
+</menu>

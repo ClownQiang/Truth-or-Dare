@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import cn.waps.AppConnect;
 import com.example.RealWordAndBigAdventure_Beta.R;
 
 /**
@@ -22,28 +23,28 @@ import com.example.RealWordAndBigAdventure_Beta.R;
  * 自定义Dialog，因为大家看见的对话框太丑了，所以自定义一个，关于AlertDialog不懂
  * 请戳[http://blog.csdn.net/hellogv/article/details/5955959]
  */
-public class DialogCreate extends AlertDialog{
+public class DialogCreate extends AlertDialog {
 
     private Context context;
     private Activity activity;
     private AlertDialog.Builder builder;
     private AlertDialog alertDialog;
-    private Button rotateagain,comeon,yes_bt,no_bt;
-    private Button realword_bt,bigadventure_bt;
+    private Button rotateagain, comeon, yes_bt, no_bt;
+    private Button realword_bt, bigadventure_bt;
     private RelativeLayout relativeLayout;
     private LinearLayout linearLayout;
     private ImageView imageView;
     private boolean flag_islighting = false;
 
     //下面两个是对话框的构造函数
-    public DialogCreate(Context context,Activity activity) {
+    public DialogCreate(Context context, Activity activity) {
         super(context);
         this.context = context;
         this.activity = activity;
     }
 
-    public DialogCreate(Context context,RelativeLayout relativeLayout,Button realword_bt,Button bigadventure_bt,
-                        LinearLayout linearLayout,ImageView imageView) {
+    public DialogCreate(Context context, RelativeLayout relativeLayout, Button realword_bt, Button bigadventure_bt,
+                        LinearLayout linearLayout, ImageView imageView) {
         super(context);
         this.context = context;
         this.relativeLayout = relativeLayout;
@@ -53,13 +54,13 @@ public class DialogCreate extends AlertDialog{
         this.imageView = imageView;
     }
 
-    public void ShowDialog(){
+    public void ShowDialog() {
         //LayoutInflater载入一个xml，有点类似findviewbyID(),不懂请戳[http://lpqsun-126-com.iteye.com/blog/1158070]
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layout = inflater.inflate(R.layout.dialog,null);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = inflater.inflate(R.layout.dialog, null);
         //这里可以写对控件的使用,这里载入xml中的按钮(Button)
-        rotateagain = (Button)layout.findViewById(R.id.rotateagain);
-        comeon = (Button)layout.findViewById(R.id.comeon);
+        rotateagain = (Button) layout.findViewById(R.id.rotateagain);
+        comeon = (Button) layout.findViewById(R.id.comeon);
 
         //为按钮设置事件
         rotateagain.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +77,7 @@ public class DialogCreate extends AlertDialog{
             public void onClick(View view) {
                 relativeLayout.setBackgroundResource(R.drawable.anniudg);
                 linearLayout.setVisibility(View.VISIBLE);
-                flag_islighting =true;
+                flag_islighting = true;
                 alertDialog.dismiss();
             }
         });
@@ -95,16 +96,17 @@ public class DialogCreate extends AlertDialog{
     }
 
     //这里设置的退出时的对话框
-    public void ExitDialog(){
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layout = inflater.inflate(R.layout.exit_dialog,null);
+    public void ExitDialog() {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = inflater.inflate(R.layout.exit_dialog, null);
 
-        yes_bt = (Button)layout.findViewById(R.id.yes_bt);
-        no_bt = (Button)layout.findViewById(R.id.no_bt);
+        yes_bt = (Button) layout.findViewById(R.id.yes_bt);
+        no_bt = (Button) layout.findViewById(R.id.no_bt);
 
         yes_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                alertDialog.dismiss();
                 activity.finish();
             }
         });
