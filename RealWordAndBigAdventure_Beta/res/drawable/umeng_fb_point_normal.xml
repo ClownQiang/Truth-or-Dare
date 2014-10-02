@@ -5,4 +5,4 @@
 	<padding android:left="7dp" android:top="7dp" android:right="7dp"
 		android:bottom="7dp" />
 	<corners android:radius="8dp" />
-</shape><!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/main/res/drawable/umeng_fb_point_normal.xml -->
+</shape><!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/activity_main/res/drawable/umeng_fb_point_normal.xml -->

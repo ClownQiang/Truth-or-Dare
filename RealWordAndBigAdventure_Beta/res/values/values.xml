@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/main/res/values/umeng_fb_color.xml -->
+    <!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/activity_main/res/values/umeng_fb_color.xml -->
     <eat-comment />
 
     <color name="umeng_fb_color_btn_normal">#333333</color>
     <color name="umeng_fb_color_btn_pressed">#1495F7</color>
-    <!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/main/res/values/umeng_fb_strings.xml -->
+    <!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/activity_main/res/values/umeng_fb_strings.xml -->
     <eat-comment />
 
     <string name="umeng_fb_back">Back</string>

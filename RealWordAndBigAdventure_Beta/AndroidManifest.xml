@@ -11,8 +11,8 @@
         </activity>
         <activity android:label="@string/app_name" android:name="MyActivity">
         </activity>
-        <activity android:name=".RealWord"/>
-        <activity android:name=".BigAdventure"/>
+        <activity android:name=".RealWordActivity"/>
+        <activity android:name=".BigAdventureActivity"/>
         <activity android:name=".Screen.GuideActivity"/>
         <activity android:name=".Screen.DoorOpenActivity"/>
 

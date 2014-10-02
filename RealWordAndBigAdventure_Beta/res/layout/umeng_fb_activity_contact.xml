@@ -70,4 +70,4 @@
         android:textSize="8sp"
         android:visibility="gone" />
 
-</RelativeLayout><!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/main/res/layout/umeng_fb_activity_contact.xml -->
+</RelativeLayout><!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/activity_main/res/layout/umeng_fb_activity_contact.xml -->

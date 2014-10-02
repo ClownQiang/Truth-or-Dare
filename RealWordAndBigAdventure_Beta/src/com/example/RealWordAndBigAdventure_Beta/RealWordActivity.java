@@ -2,7 +2,6 @@ package com.example.RealWordAndBigAdventure_Beta;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,12 +14,6 @@ import com.example.RealWordAndBigAdventure_Beta.tools.Constant;
 import com.example.RealWordAndBigAdventure_Beta.tools.ShakeChange;
 import com.example.RealWordAndBigAdventure_Beta.tools.Utils;
 import com.umeng.fb.FeedbackAgent;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.controller.UMServiceFactory;
-import com.umeng.socialize.controller.UMSocialService;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.sso.QZoneSsoHandler;
-import com.umeng.socialize.sso.RenrenSsoHandler;
 
 import java.io.IOException;
 
@@ -28,41 +21,41 @@ import java.io.IOException;
  * Created with IntelliJ IDEA.
  * User: daizhiqiang
  * Date: 13-11-12
- * Time: 下午1:07
+ * Time: 下午12:44
  * To change this template use File | Settings | File Templates.
  */
-/*
- * 进入后的大冒险界面
- */
-public class BigAdventure extends Activity {
 
-    private TextView bigadventure_tv;
+/*
+ * 进入后的真心话界面
+ */
+public class RealWordActivity extends Activity {
+
+    private TextView realword_tv;
     private ShakeChange shakeChange;
-    private LinearLayout linearLayout;
     private ImageView topview, bottomview;
     private TextRead textRead;
-    private String showText = "";
+    private String showText;
     private RelativeLayout relativeLayout;
+    //private Button back_bt,share_bt;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.bigadventure);
+        setContentView(R.layout.activity_realword);
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("大冒险");
+        actionBar.setTitle("真心话");
 
         AppConnect.getInstance(this);
-        bigadventure_tv = (TextView) findViewById(R.id.bigadventure_textview);
-        topview = (ImageView) findViewById(R.id.bigadventure_topview);
-        bottomview = (ImageView) findViewById(R.id.bigadventure_bottomview);
-        relativeLayout = (RelativeLayout) findViewById(R.id.big_rl);
-        shakeChange = new ShakeChange(BigAdventure.this, bigadventure_tv, 2, topview, bottomview);
-        textRead = new TextRead(BigAdventure.this, 2);
 
-        linearLayout = (LinearLayout) findViewById(R.id.linearlayout_bottom);
+        realword_tv = (TextView) findViewById(R.id.realword_textview);
+        topview = (ImageView) findViewById(R.id.realword_topview);
+        bottomview = (ImageView) findViewById(R.id.realword_bottomview);
+        relativeLayout = (RelativeLayout) findViewById(R.id.real_rl);
 
-        //设置触摸监听器，在触摸时调用
+        shakeChange = new ShakeChange(RealWordActivity.this, realword_tv, 1, topview, bottomview);
+        textRead = new TextRead(RealWordActivity.this, 1);
+
         relativeLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -72,7 +65,7 @@ public class BigAdventure extends Activity {
                     public void run() {
                         try {
                             showText = textRead.LineRead();
-                            bigadventure_tv.setText(showText);
+                            realword_tv.setText(showText);
                         } catch (IOException e) {
                             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                         }
@@ -99,11 +92,11 @@ public class BigAdventure extends Activity {
                 return true;
             case R.id.menu_add:
                 Intent intent = new Intent(this, AddActivity.class);
-                intent.putExtra("flag", Constant.BIGADVENTURE);
+                intent.putExtra("flag", Constant.REALWORLD);
                 startActivity(intent);
                 return true;
             case R.id.menu_share:
-                Utils.shareSNS(showText, this, Constant.BIGADVENTURE);
+                Utils.shareSNS(showText, this, Constant.REALWORLD);
                 return true;
             case R.id.menu_feedback:
                 FeedbackAgent feedbackAgent = new FeedbackAgent(this);

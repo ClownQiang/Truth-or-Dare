@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/main/res/values-zh/umeng_fb_strings.xml -->
+    <!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/activity_main/res/values-zh/umeng_fb_strings.xml -->
     <eat-comment />
 
     <string name="umeng_fb_back">返回</string>

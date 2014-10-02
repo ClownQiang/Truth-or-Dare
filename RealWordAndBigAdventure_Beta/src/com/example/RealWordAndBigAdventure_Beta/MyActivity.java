@@ -1,8 +1,6 @@
 package com.example.RealWordAndBigAdventure_Beta;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -46,7 +44,7 @@ public class MyActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
 
 
         AppConnect.getInstance(this);
@@ -134,7 +132,7 @@ public class MyActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(MyActivity.this, RealWord.class);
+                intent.setClass(MyActivity.this, RealWordActivity.class);
                 flag_intent = true;
                 MyActivity.this.startActivity(intent);
             }
@@ -144,7 +142,7 @@ public class MyActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(MyActivity.this, BigAdventure.class);
+                intent.setClass(MyActivity.this, BigAdventureActivity.class);
                 flag_intent = true;
                 MyActivity.this.startActivity(intent);
             }
