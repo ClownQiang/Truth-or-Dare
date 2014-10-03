@@ -3,4 +3,4 @@
 	android:shape="rectangle">
 	<gradient android:startColor="#4D892F" android:endColor="#8CC054"
 		android:type="linear" android:angle="90" />
-</shape><!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/main/res/drawable/umeng_fb_top_banner.xml -->
+</shape><!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/activity_main/res/drawable/umeng_fb_top_banner.xml -->

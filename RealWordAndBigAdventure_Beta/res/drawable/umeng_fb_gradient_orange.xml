@@ -4,4 +4,4 @@
 	<gradient android:startColor="#FFA500" android:endColor="#E0AA6E"
 		android:type="linear" android:angle="90" />
 	<corners android:radius="8dp" />
-</shape><!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/main/res/drawable/umeng_fb_gradient_orange.xml -->
+</shape><!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/activity_main/res/drawable/umeng_fb_gradient_orange.xml -->

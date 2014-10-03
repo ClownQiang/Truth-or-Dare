@@ -5,4 +5,4 @@
     android:fromYDelta="0.0%"
     android:toXDelta="0%"
     android:toYDelta="0.0%" />
-<!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/main/res/anim/umeng_fb_slide_in_from_left.xml -->
+<!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/activity_main/res/anim/umeng_fb_slide_in_from_left.xml -->

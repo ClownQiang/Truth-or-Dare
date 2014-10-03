@@ -2,7 +2,6 @@ package com.example.RealWordAndBigAdventure_Beta;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,12 +14,6 @@ import com.example.RealWordAndBigAdventure_Beta.tools.Constant;
 import com.example.RealWordAndBigAdventure_Beta.tools.ShakeChange;
 import com.example.RealWordAndBigAdventure_Beta.tools.Utils;
 import com.umeng.fb.FeedbackAgent;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.controller.UMServiceFactory;
-import com.umeng.socialize.controller.UMSocialService;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.sso.QZoneSsoHandler;
-import com.umeng.socialize.sso.RenrenSsoHandler;
 
 import java.io.IOException;
 
@@ -34,7 +27,7 @@ import java.io.IOException;
 /*
  * 进入后的大冒险界面
  */
-public class BigAdventure extends Activity {
+public class BigAdventureActivity extends Activity {
 
     private TextView bigadventure_tv;
     private ShakeChange shakeChange;
@@ -46,7 +39,7 @@ public class BigAdventure extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.bigadventure);
+        setContentView(R.layout.activity_bigadventure);
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -57,8 +50,8 @@ public class BigAdventure extends Activity {
         topview = (ImageView) findViewById(R.id.bigadventure_topview);
         bottomview = (ImageView) findViewById(R.id.bigadventure_bottomview);
         relativeLayout = (RelativeLayout) findViewById(R.id.big_rl);
-        shakeChange = new ShakeChange(BigAdventure.this, bigadventure_tv, 2, topview, bottomview);
-        textRead = new TextRead(BigAdventure.this, 2);
+        shakeChange = new ShakeChange(BigAdventureActivity.this, bigadventure_tv, 2, topview, bottomview);
+        textRead = new TextRead(BigAdventureActivity.this, 2);
 
         linearLayout = (LinearLayout) findViewById(R.id.linearlayout_bottom);
 

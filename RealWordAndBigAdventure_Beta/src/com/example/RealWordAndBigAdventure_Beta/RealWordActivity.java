@@ -6,20 +6,16 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import cn.waps.AppConnect;
+import com.example.RealWordAndBigAdventure_Beta.TextRead.RealWord;
 import com.example.RealWordAndBigAdventure_Beta.TextRead.TextRead;
 import com.example.RealWordAndBigAdventure_Beta.tools.Constant;
 import com.example.RealWordAndBigAdventure_Beta.tools.ShakeChange;
 import com.example.RealWordAndBigAdventure_Beta.tools.Utils;
 import com.umeng.fb.FeedbackAgent;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.controller.UMServiceFactory;
-import com.umeng.socialize.controller.UMSocialService;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.sso.QZoneSsoHandler;
-import com.umeng.socialize.sso.RenrenSsoHandler;
 
 import java.io.IOException;
 
@@ -34,7 +30,7 @@ import java.io.IOException;
 /*
  * 进入后的真心话界面
  */
-public class RealWord extends Activity {
+public class RealWordActivity extends Activity {
 
     private TextView realword_tv;
     private ShakeChange shakeChange;
@@ -46,7 +42,7 @@ public class RealWord extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.realword);
+        setContentView(R.layout.activity_realword);
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -54,13 +50,18 @@ public class RealWord extends Activity {
 
         AppConnect.getInstance(this);
 
+        new RealWord("ha", "1").save();
+        Log.d("ClownQiang", RealWord.listAll(RealWord.class).size() + "");
+        RealWord realWord = RealWord.findById(RealWord.class, (long) 1);
+        Log.d("ClownQiang", realWord.getNum() + realWord.getItem() + realWord.getId());
+
         realword_tv = (TextView) findViewById(R.id.realword_textview);
         topview = (ImageView) findViewById(R.id.realword_topview);
         bottomview = (ImageView) findViewById(R.id.realword_bottomview);
         relativeLayout = (RelativeLayout) findViewById(R.id.real_rl);
 
-        shakeChange = new ShakeChange(RealWord.this, realword_tv, 1, topview, bottomview);
-        textRead = new TextRead(RealWord.this, 1);
+        shakeChange = new ShakeChange(RealWordActivity.this, realword_tv, 1, topview, bottomview);
+        textRead = new TextRead(RealWordActivity.this, 1);
 
         relativeLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override

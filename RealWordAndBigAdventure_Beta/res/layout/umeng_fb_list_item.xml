@@ -58,4 +58,4 @@
             android:textSize="15sp" />
     </RelativeLayout>
 
-</RelativeLayout><!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/main/res/layout/umeng_fb_list_item.xml -->
+</RelativeLayout><!-- From: file:/Users/lucas/dev/workspace/umeng/feedback/umeng-feedback-android/sdk/src/activity_main/res/layout/umeng_fb_list_item.xml -->
