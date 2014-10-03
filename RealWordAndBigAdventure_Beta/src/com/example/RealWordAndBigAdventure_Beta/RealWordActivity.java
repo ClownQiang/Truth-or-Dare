@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import cn.waps.AppConnect;
+import com.example.RealWordAndBigAdventure_Beta.TextRead.RealWord;
 import com.example.RealWordAndBigAdventure_Beta.TextRead.TextRead;
 import com.example.RealWordAndBigAdventure_Beta.tools.Constant;
 import com.example.RealWordAndBigAdventure_Beta.tools.ShakeChange;
@@ -47,6 +49,11 @@ public class RealWordActivity extends Activity {
         actionBar.setTitle("真心话");
 
         AppConnect.getInstance(this);
+
+        new RealWord("ha", "1").save();
+        Log.d("ClownQiang", RealWord.listAll(RealWord.class).size() + "");
+        RealWord realWord = RealWord.findById(RealWord.class, (long) 1);
+        Log.d("ClownQiang", realWord.getNum() + realWord.getItem() + realWord.getId());
 
         realword_tv = (TextView) findViewById(R.id.realword_textview);
         topview = (ImageView) findViewById(R.id.realword_topview);

@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="2" android:versionName="1.1"
           package="com.example.RealWordAndBigAdventure_Beta">
     <uses-sdk android:minSdkVersion="14"/>
-    <application android:icon="@drawable/zxhdmxlogo" android:label="@string/app_name">
+    <application android:icon="@drawable/zxhdmxlogo" android:label="@string/app_name"
+                 android:name="com.orm.SugarApp"
+            >
         <activity android:name=".Screen.FlashActivity" android:theme="@style/Anim_style2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -15,7 +17,7 @@
         <activity android:name=".BigAdventureActivity"/>
         <activity android:name=".Screen.GuideActivity"/>
         <activity android:name=".Screen.DoorOpenActivity"/>
-        <activity android:name=".AddActivity" android:theme="@android:style/Theme.Holo.Light" android:label="添加"/>
+        <activity android:name=".AddActivity" android:theme="@android:style/Theme.Holo.Light" android:label="自定义惩罚"/>
 
         <!--Umeng Service Setting-->
         <service android:name="com.umeng.update.net.DownloadingService" android:process=":DownloadingService">
@@ -55,6 +57,11 @@
         <!--Ad Service-->
         <meta-data android:name="APP_ID" android:value="da372f4bbc6dae4961b22f5f54f94348"/>
         <meta-data android:name="APP_PID" android:value="default"/>
+        <!--Sugar DB-->
+        <meta-data android:name="DATABASE" android:value="realword_bigadventure.db" />
+        <meta-data android:name="VERSION" android:value="1" />
+        <meta-data android:name="QUERY_LOG" android:value="true" />
+        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="com.example" />
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
